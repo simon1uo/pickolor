@@ -1,12 +1,12 @@
-import type { ColorError, ColorModel, ColorSpace, ColorValues } from './types'
+import type { ColorError, ColorModel, FormatType } from './types'
 import { colord } from 'colord'
 import { createError } from './errors'
 import { runParsePlugins } from './plugins'
 
 const PRECISION = 4
-
 const HEX_REGEX = /^#?(?:[0-9a-f]{3}|[0-9a-f]{4}|[0-9a-f]{6}|[0-9a-f]{8})$/i
-const HSL_MARKER = /hsl/i
+const HSL_MARKER = /hsla?/i
+const RGBA_MARKER = /rgba/i
 
 function round(value: number, precision = PRECISION): number {
   return Number(value.toFixed(precision))
@@ -30,39 +30,15 @@ function normalizeAlpha(alpha: number | undefined): number {
   return Math.min(1, Math.max(0, round(alpha)))
 }
 
-function inferSpace(input: string): ColorSpace {
-  if (HEX_REGEX.test(input.trim()))
+function inferFormat(input: string): FormatType {
+  const normalized = input.trim()
+  if (HEX_REGEX.test(normalized))
     return 'hex'
-  if (HSL_MARKER.test(input))
-    return 'hsl'
+  if (HSL_MARKER.test(normalized))
+    return normalized.toLowerCase().includes('hsla') ? 'hsla' : 'hsl'
+  if (RGBA_MARKER.test(normalized))
+    return 'rgba'
   return 'rgb'
-}
-
-function toHexValue(color: ReturnType<typeof colord>): string {
-  return color.toHex().replace('#', '').toLowerCase()
-}
-
-function toValues(space: ColorSpace, color: ReturnType<typeof colord>): ColorValues {
-  if (space === 'hex') {
-    return { hex: toHexValue(color) }
-  }
-
-  if (space === 'hsl') {
-    const hsl = color.toHsl()
-    return {
-      h: round(hsl.h, PRECISION),
-      s: round(hsl.s / 100, PRECISION),
-      l: round(hsl.l / 100, PRECISION),
-    }
-  }
-
-  // default rgb
-  const rgb = color.toRgb()
-  return {
-    r: rgb.r,
-    g: rgb.g,
-    b: rgb.b,
-  }
 }
 
 export function parseColor(input: string): ColorModel {
@@ -80,14 +56,18 @@ export function parseColor(input: string): ColorModel {
     throw err
   }
 
-  const space = inferSpace(input)
+  const hsv = color.toHsv()
   const inputAlpha = parseAlphaFromInput(input)
   const alpha = normalizeAlpha(inputAlpha ?? color.toRgb().a)
 
-  return {
-    space,
-    values: toValues(space, color),
-    alpha,
+  const model: ColorModel = {
+    h: round(hsv.h, PRECISION),
+    s: round(hsv.s / 100, PRECISION),
+    v: round(hsv.v / 100, PRECISION),
+    a: alpha,
+    format: inferFormat(input),
     source: input,
   }
+
+  return model
 }

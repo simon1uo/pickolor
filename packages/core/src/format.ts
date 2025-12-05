@@ -1,4 +1,4 @@
-import type { ColorError, ColorModel, FormatRequest, FormatTarget } from './types'
+import type { ColorError, ColorModel, FormatRequest, FormatType } from './types'
 import { colord } from 'colord'
 import { createError } from './errors'
 import { runFormatPlugins } from './plugins'
@@ -21,27 +21,24 @@ function resolvePrecision(request: FormatRequest): number {
   return precision
 }
 
+function clampAlpha(alpha: number | undefined): number {
+  if (alpha === undefined || Number.isNaN(alpha))
+    return 1
+  return Math.min(1, Math.max(0, round(alpha)))
+}
+
 function modelToColord(model: ColorModel) {
-  const alpha = model.alpha ?? 1
-  switch (model.space) {
-    case 'hex': {
-      const color = colord(`#${(model.values as any).hex}`)
-      if (!color.isValid()) {
-        throw createError('format', 'INVALID_MODEL', 'Invalid hex color model')
-      }
-      return color.alpha(alpha)
-    }
-    case 'hsl': {
-      const { h, s, l } = model.values as any
-      return colord({ h, s: s * 100, l: l * 100, a: alpha })
-    }
-    case 'rgb': {
-      const { r, g, b } = model.values as any
-      return colord({ r, g, b, a: alpha })
-    }
-    default:
-      throw createError('format', 'UNSUPPORTED_SPACE', `Unsupported color space: ${model.space}`)
-  }
+  const color = colord({
+    h: model.h,
+    s: model.s * 100,
+    v: model.v * 100,
+    a: clampAlpha(model.a),
+  })
+
+  if (!color.isValid())
+    throw createError('format', 'INVALID_MODEL', 'Invalid color model')
+
+  return color
 }
 
 function hexFromRgb(color: ReturnType<typeof colord>): string {
@@ -59,7 +56,7 @@ function hexWithAlpha(color: ReturnType<typeof colord>, alpha: number): string {
 
 function formatByTarget(
   color: ReturnType<typeof colord>,
-  target: FormatTarget,
+  target: FormatType,
   precision: number,
   includeAlpha: boolean,
 ): string {
@@ -105,5 +102,6 @@ export function formatColor(model: ColorModel, request: FormatRequest): string {
     throw err
   }
 
-  return formatByTarget(color, request.target, precision, includeAlpha)
+  const target = request.target ?? model.format
+  return formatByTarget(color, target, precision, includeAlpha)
 }

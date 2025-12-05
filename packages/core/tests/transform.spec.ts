@@ -13,7 +13,8 @@ describe('transformColor', () => {
 
     const out = formatColor(result, { target: 'rgba', precision: 4, includeAlpha: true })
     expect(out).toMatch(/^rgba\(/)
-    expect(result.alpha).toBeCloseTo(1, 4)
+    expect(result.a).toBeCloseTo(1, 4)
+    expect(result.v).toBeLessThanOrEqual(1)
   })
 
   it('handles hue shift and alpha adjustments in order', () => {
@@ -23,7 +24,8 @@ describe('transformColor', () => {
     ])
 
     expect(result.source).toBe(baseHex)
-    expect(result.alpha).toBeCloseTo(0.75, 2)
+    expect(result.a).toBeCloseTo(0.75, 2)
+    expect(result.h).toBeGreaterThanOrEqual(0)
   })
 
   it('throws structured error for unsupported transform type', () => {

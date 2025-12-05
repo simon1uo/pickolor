@@ -1,23 +1,25 @@
-export type ColorSpace = 'hex' | 'rgb' | 'hsl' | 'oklch'
+export type FormatType = 'hex' | 'rgba' | 'rgb' | 'hsla' | 'hsl' | 'oklch'
 
-export interface HexValues { hex: string }
-export interface RgbValues { r: number, g: number, b: number }
-export interface HslValues { h: number, s: number, l: number }
-export interface OklchValues { l: number, c: number, h: number }
-
-export type ColorValues = HexValues | RgbValues | HslValues | OklchValues
-
+/**
+ * ColorModel 采用 HSVA 作为单一来源（0-1 归一化），并记录最近的格式视图。
+ * h: 0-360, s/v/a: 0-1
+ */
 export interface ColorModel {
-  space: ColorSpace
-  values: ColorValues
-  alpha: number
+  h: number
+  s: number
+  v: number
+  a: number
+  format: FormatType
   source: string
 }
 
-export type FormatTarget = 'hex' | 'rgba' | 'rgb' | 'hsla' | 'hsl' | 'oklch'
+export interface FormatView {
+  type: FormatType
+  text: string
+}
 
 export interface FormatRequest {
-  target: FormatTarget
+  target: FormatType
   precision?: number
   includeAlpha?: boolean
 }
@@ -65,7 +67,7 @@ export interface ColorError {
 
 export interface Plugin {
   name: string
-  supports?: Partial<Record<FormatTarget | ColorSpace, boolean>>
+  supports?: Partial<Record<FormatType, boolean>>
   parse?: (input: string) => ColorModel | null
   format?: (model: ColorModel, request: FormatRequest) => string | null
   transform?: (model: ColorModel, step: Transformation) => ColorModel | null

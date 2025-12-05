@@ -4,10 +4,13 @@
   --pickolor-border: #d0d5dd;
   --pickolor-border-focus: #7f56d9;
   --pickolor-bg: #ffffff;
+  --pickolor-panel-bg: #ffffff;
   --pickolor-text: #101828;
   --pickolor-muted: #667085;
+  --pickolor-accent: #7f56d9;
   --pickolor-shadow: 0 6px 20px rgba(16, 24, 40, 0.08);
   --pickolor-gap: 6px;
+  --pickolor-swatch-size: 28px;
 }
 
 .pickolor-react-picker,
@@ -43,6 +46,12 @@
   box-shadow: 0 0 0 3px rgba(127, 86, 217, 0.15);
 }
 
+.pickolor-react-input[aria-invalid='true'],
+.pickolor-vue-input[aria-invalid='true'] {
+  border-color: #f04438;
+  box-shadow: 0 0 0 3px rgba(240, 68, 56, 0.15);
+}
+
 .pickolor-react-hint,
 .pickolor-vue-hint {
   color: var(--pickolor-muted);
@@ -51,9 +60,40 @@
 }
 
 .pickolor-swatch {
-  width: 28px;
-  height: 28px;
+  width: var(--pickolor-swatch-size);
+  height: var(--pickolor-swatch-size);
   border-radius: var(--pickolor-radius);
   border: 1px solid var(--pickolor-border);
   box-shadow: var(--pickolor-shadow);
+}
+
+.pickolor-swatch.is-empty {
+  background: repeating-conic-gradient(#eee 0% 25%, #fff 0% 50%);
+}
+
+.pickolor-popover {
+  background: var(--pickolor-panel-bg);
+  border: 1px solid var(--pickolor-border);
+  border-radius: var(--pickolor-radius);
+  box-shadow: var(--pickolor-shadow);
+  padding: 12px;
+}
+
+.pickolor-slider,
+.pickolor-plane {
+  position: relative;
+  border-radius: var(--pickolor-radius);
+  border: 1px solid var(--pickolor-border);
+  background: linear-gradient(90deg, #fff, var(--pickolor-accent));
+}
+
+.pickolor-slider-thumb,
+.pickolor-plane-thumb {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--pickolor-border);
+  background: var(--pickolor-accent);
 }

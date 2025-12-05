@@ -1,4 +1,4 @@
-import type { ColorModel, ColorSpace, ColorValues, Transformation } from './types'
+import type { ColorModel, Transformation } from './types'
 import { colord } from 'colord'
 import { createError } from './errors'
 import { assertWithinRange } from './types'
@@ -15,38 +15,13 @@ function normalizeAlpha(alpha: number | undefined): number {
   return Math.min(1, Math.max(0, round(alpha)))
 }
 
-function toValues(space: ColorSpace, color: ReturnType<typeof colord>): ColorValues {
-  if (space === 'hex') {
-    return { hex: color.toHex().replace('#', '').toLowerCase() }
-  }
-  if (space === 'hsl') {
-    const hsl = color.toHsl()
-    return {
-      h: round(hsl.h, PRECISION),
-      s: round(hsl.s / 100, PRECISION),
-      l: round(hsl.l / 100, PRECISION),
-    }
-  }
-  const rgb = color.toRgb()
-  return { r: rgb.r, g: rgb.g, b: rgb.b }
-}
-
 function modelToColord(model: ColorModel) {
-  const alpha = model.alpha ?? 1
-  switch (model.space) {
-    case 'hex':
-      return colord(`#${(model.values as any).hex}`).alpha(alpha)
-    case 'hsl': {
-      const { h, s, l } = model.values as any
-      return colord({ h, s: s * 100, l: l * 100, a: alpha })
-    }
-    case 'rgb': {
-      const { r, g, b } = model.values as any
-      return colord({ r, g, b, a: alpha })
-    }
-    default:
-      throw createError('transform', 'UNSUPPORTED_SPACE', `Unsupported color space: ${model.space}`)
-  }
+  return colord({
+    h: model.h,
+    s: model.s * 100,
+    v: model.v * 100,
+    a: normalizeAlpha(model.a),
+  })
 }
 
 function applyStep(color: ReturnType<typeof colord>, step: Transformation): ReturnType<typeof colord> {
@@ -97,12 +72,15 @@ export function transformColor(model: ColorModel, steps: Transformation[]): Colo
     color = applyStep(color, step)
   }
 
+  const hsv = color.toHsv()
   const alpha = normalizeAlpha(color.toRgb().a)
 
   return {
-    space: model.space,
-    values: toValues(model.space, color),
-    alpha,
+    h: round(hsv.h, PRECISION),
+    s: round(hsv.s / 100, PRECISION),
+    v: round(hsv.v / 100, PRECISION),
+    a: alpha,
+    format: model.format,
     source: model.source,
   }
 }
