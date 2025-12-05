@@ -1,0 +1,32 @@
+{
+  "name": "@pickolor/styles",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Optional styles and CSS variables for Pickolor shells",
+  "license": "MIT",
+  "sideEffects": ["./dist/styles.css", "./src/styles.css"],
+  "exports": {
+    ".": {
+      "import": "./dist/styles.css",
+      "require": "./dist/styles.css",
+      "default": "./dist/styles.css"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "style": "dist/styles.css",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "mkdir -p dist && cp src/styles.css dist/styles.css",
+    "lint": "eslint src --ext .ts,.js,.tsx,.jsx",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
+  }
+}

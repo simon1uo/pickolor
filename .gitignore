@@ -1,0 +1,28 @@
+# Node
+node_modules/
+dist/
+build/
+coverage/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+
+# Env
+.env
+.env.*
+
+# Editors/OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Output/locks
+logs/
+*.tgz
+
+tmp/

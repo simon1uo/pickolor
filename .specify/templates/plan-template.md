@@ -31,7 +31,11 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Core remains framework-agnostic and headless; no React/Vue/styling coupling inside core packages.
+- Color data model stays unified and authoritative across all packages and demos.
+- Internal logic stays minimal; prefer mature color-processing libraries instead of bespoke math.
+- UI shells are thin adapters; optional CSS is additive, not required for functionality or accessibility.
+- APIs stay predictable and documented; any breaking change includes rationale and migration guidance.
 
 ## Project Structure
 

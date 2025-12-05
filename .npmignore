@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+coverage/
+logs/
+*.log
+*.tsbuildinfo
+
+tmp/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+specs/
+.specify/
+.codex/

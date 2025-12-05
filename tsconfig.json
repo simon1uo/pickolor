@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./configs/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@pickolor/core": ["packages/core/src"],
+      "@pickolor/react": ["packages/react/src"],
+      "@pickolor/vue": ["packages/vue/src"],
+      "@pickolor/styles": ["packages/styles/src"]
+    }
+  },
+  "references": [
+    { "path": "packages/core/tsconfig.json" },
+    { "path": "packages/react/tsconfig.json" },
+    { "path": "packages/vue/tsconfig.json" },
+    { "path": "packages/styles/tsconfig.json" }
+  ],
+  "include": [
+    "packages/**/*/src/**/*",
+    "packages/**/*/tests/**/*",
+    "examples/**/*/src/**/*",
+    "examples/**/vite.config.ts",
+    "packages/**/tsup.config.ts",
+    "scripts/**/*",
+    "tests/**/*",
+    "vitest.config.ts"
+  ]
+}

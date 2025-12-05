@@ -1,0 +1,32 @@
+{
+  "name": "pickolor-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@8.15.4",
+  "description": "Pickolor multi-package color toolkit (core + React/Vue shells + styles)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev:react": "pnpm --filter ./examples/react dev",
+    "dev:vue": "pnpm --filter ./examples/vue dev",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.vue",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.4.1",
+    "@eslint-react/eslint-plugin": "^2.3.12",
+    "@types/node": "^24.10.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.12",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.6",
+    "vitest": "^4.0.15"
+  }
+}
