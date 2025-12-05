@@ -108,10 +108,10 @@
 
 - [X] T031 验证打包体积与依赖约束（核心 gzip ≤30KB 依赖≤2；壳层 gzip ≤25KB 额外依赖≤1），超标视为失败并记录测量数据：`specs/001-init-color-monorepo/research.md`
 - [X] T032 校验 ESM+CJS+d.ts 输出与 sideEffects 标记，更新 `packages/*/package.json`
-- [ ] T033 [P] 文档与快速开始校对：更新 `specs/001-init-color-monorepo/quickstart.md`、根 `README.md`
-- [ ] T034 [P] 示例自测脚本：在 `examples/react`、`examples/vue` 添加 `README` 与运行脚本说明
-- [ ] T035 收尾检查：运行 `pnpm lint && pnpm test && pnpm build`，记录结果
-- [ ] T036 确认跨框架兼容配置：设置 React/Vue peerDependencies 下限、Node engines ≥18、tsup ESM+CJS 双入口，更新 `packages/*/package.json`、`packages/*/tsup.config.ts`
+- [X] T033 [P] 文档与快速开始校对：更新 `specs/001-init-color-monorepo/quickstart.md`、根 `README.md`
+- [X] T034 [P] 示例自测脚本：在 `examples/react`、`examples/vue` 添加 `README` 与运行脚本说明
+- [X] T035 收尾检查：运行 `pnpm lint && pnpm test && pnpm build`，记录结果
+- [X] T036 确认跨框架兼容配置：设置 React/Vue peerDependencies 下限、Node engines ≥18、tsup ESM+CJS 双入口，更新 `packages/*/package.json`、`packages/*/tsup.config.ts`
 - [ ] T037 运行 Vite SSR 冒烟测试（React/Vue 示例各一次，Node ≥18），记录结果：`examples/react`、`examples/vue`
 - [ ] T038 编写发布与版本策略文档（SemVer、破坏性变更仅主版本、提前 2 周公告、迁移指南流程）：`docs/release.md`
 - [ ] T039 添加发布校验脚本（校验版本号与 changelog/migration 模板存在）：`scripts/release/check-version.ts`
