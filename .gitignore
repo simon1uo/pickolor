@@ -26,3 +26,5 @@ logs/
 *.tgz
 
 tmp/
+packages/*/tests/*.d.ts
+packages/*/tests/*.d.ts.map

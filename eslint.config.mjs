@@ -16,7 +16,5 @@ export default antfu({
     'specs/**',
     '.codex/**',
   ],
-  typescript: {
-    tsconfigPath: 'tsconfig.json',
-  },
+
 })

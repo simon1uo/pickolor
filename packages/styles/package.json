@@ -22,7 +22,7 @@
   "scripts": {
     "build": "mkdir -p dist && cp src/styles.css dist/styles.css",
     "lint": "eslint src --ext .ts,.js,.tsx,.jsx",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {
     "tsup": "^8.5.1",

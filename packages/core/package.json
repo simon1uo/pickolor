@@ -7,21 +7,24 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": {
+        "import": "./dist/index.d.ts",
+        "require": "./dist/index.d.cts"
+      },
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
     "build": "tsup --config tsup.config.ts",
     "lint": "eslint src --ext .ts",
-    "test": "vitest run"
+    "test": "vitest run --dir ../../ -c ../../vitest.config.ts packages/core/tests"
   },
   "dependencies": {
     "colord": "^2.9.3"

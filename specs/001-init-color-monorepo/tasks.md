@@ -46,14 +46,14 @@
 **Independent Test**: 通过核心纯函数对 HEX/RGB(A)/HSL(A)/OKLCH 解析与格式化的单测全通过。
 
 ### Tests for User Story 1
-- [ ] T012 [P] [US1] 编写解析/格式化单测（合法/非法/越界/精度舍入）：`packages/core/tests/parse-format.spec.ts`
+- [X] T012 [P] [US1] 编写解析/格式化单测（合法/非法/越界/精度舍入）：`packages/core/tests/parse-format.spec.ts`
 
 ### Implementation for User Story 1
-- [ ] T013 [US1] 定义核心类型与错误契约：`packages/core/src/types.ts`、`packages/core/src/errors.ts`
-- [ ] T014 [US1] 实现解析管线（委托 colord，含适配层与错误映射）：`packages/core/src/parse.ts`
-- [ ] T015 [US1] 实现格式化管线（统一模型→目标格式，精度/alpha 处理）：`packages/core/src/format.ts`
-- [ ] T016 [US1] 实现插件注册与调用钩子：`packages/core/src/plugins.ts`
-- [ ] T017 [US1] 汇总核心入口与树摇友好导出：`packages/core/src/index.ts`
+- [X] T013 [US1] 定义核心类型与错误契约：`packages/core/src/types.ts`、`packages/core/src/errors.ts`
+- [X] T014 [US1] 实现解析管线（委托 colord，含适配层与错误映射）：`packages/core/src/parse.ts`
+- [X] T015 [US1] 实现格式化管线（统一模型→目标格式，精度/alpha 处理）：`packages/core/src/format.ts`
+- [X] T016 [US1] 实现插件注册与调用钩子：`packages/core/src/plugins.ts`
+- [X] T017 [US1] 汇总核心入口与树摇友好导出：`packages/core/src/index.ts`
 
 **Checkpoint**: 核心解析/格式化能力可独立验证，满足 FR-001/FR-002/FR-009/FR-010
 
