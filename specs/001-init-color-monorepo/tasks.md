@@ -65,13 +65,13 @@
 **Independent Test**: 变换链单测覆盖顺序性、超界处理与输出一致性。
 
 ### Tests for User Story 2
-- [ ] T018 [P] [US2] 编写变换链单测（亮度/饱和度/色相/alpha、超界/非法输入、顺序与舍入）：`packages/core/tests/transform.spec.ts`
+- [X] T018 [P] [US2] 编写变换链单测（亮度/饱和度/色相/alpha、超界/非法输入、顺序与舍入）：`packages/core/tests/transform.spec.ts`
 
 ### Implementation for User Story 2
-- [ ] T019 [US2] 定义 Transformation 约束与校验：`packages/core/src/transform/types.ts`
-- [ ] T020 [US2] 实现变换引擎（链式应用 + 精度/回退策略）：`packages/core/src/transform/engine.ts`
-- [ ] T021 [US2] 暴露变换 API 与组合工具：`packages/core/src/transform/index.ts`
-- [ ] T022 [US2] 更新核心入口导出 headless 变换能力：`packages/core/src/index.ts`
+- [X] T019 [US2] 定义 Transformation 约束与校验：`packages/core/src/transform/types.ts`
+- [X] T020 [US2] 实现变换引擎（链式应用 + 精度/回退策略）：`packages/core/src/transform/index.ts`
+- [X] T021 [US2] 暴露变换 API 与组合工具：`packages/core/src/transform/index.ts`
+- [X] T022 [US2] 更新核心入口导出 headless 变换能力：`packages/core/src/index.ts`
 
 **Checkpoint**: 变换能力可独立验证，满足 FR-003/FR-004/FR-005
 

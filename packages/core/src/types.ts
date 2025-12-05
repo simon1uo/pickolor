@@ -35,6 +35,25 @@ export interface Transformation {
   value: number
 }
 
+export const TRANSFORM_RANGES: Record<TransformationType, { min: number, max: number }> = {
+  lighten: { min: -1, max: 1 },
+  darken: { min: -1, max: 1 },
+  saturate: { min: -1, max: 1 },
+  desaturate: { min: -1, max: 1 },
+  hueShift: { min: -360, max: 360 },
+  alpha: { min: -1, max: 1 },
+}
+
+export function assertWithinRange(step: Transformation): void {
+  const range = TRANSFORM_RANGES[step.type]
+  if (!range)
+    return
+
+  const { min, max } = range
+  if (step.value < min || step.value > max)
+    throw new RangeError(`Value for ${step.type} must be between ${min} and ${max}`)
+}
+
 export type ColorErrorType = 'parse' | 'format' | 'transform' | 'plugin'
 
 export interface ColorError {

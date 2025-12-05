@@ -1,5 +1,6 @@
 export * from './errors'
-export { formatColor } from './format'
-export { parseColor } from './parse'
+export * from './format'
+export * from './parse'
 export * from './plugins'
+export * from './transform'
 export * from './types'
