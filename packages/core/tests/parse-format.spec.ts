@@ -1,3 +1,4 @@
+import type { ColorModel } from '../src'
 import { describe, expect, it } from 'vitest'
 import { formatColor, parseColor } from '../src'
 
@@ -43,7 +44,7 @@ describe('formatColor', () => {
     values: { r: 255, g: 136, b: 0 },
     alpha: 0.8,
     source: 'rgb(255,136,0)',
-  }
+  } as ColorModel
 
   it('formats to rgba string with precision and alpha', () => {
     const out = formatColor(baseModel, {
