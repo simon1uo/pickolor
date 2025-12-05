@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "types": [
+      "vue"
+    ],
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "skipLibCheck": true
+  },
+  "references": [],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "tests",
+    "dist",
+    "build",
+    "coverage",
+    "node_modules"
+  ]
+}

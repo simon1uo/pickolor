@@ -106,8 +106,8 @@
 
 ## Phase N: Polish & Cross-Cutting Concerns
 
-- [ ] T031 验证打包体积与依赖约束（核心 gzip ≤30KB 依赖≤2；壳层 gzip ≤25KB 额外依赖≤1），超标视为失败并记录测量数据：`specs/001-init-color-monorepo/research.md`
-- [ ] T032 校验 ESM+CJS+d.ts 输出与 sideEffects 标记，更新 `packages/*/package.json`
+- [X] T031 验证打包体积与依赖约束（核心 gzip ≤30KB 依赖≤2；壳层 gzip ≤25KB 额外依赖≤1），超标视为失败并记录测量数据：`specs/001-init-color-monorepo/research.md`
+- [X] T032 校验 ESM+CJS+d.ts 输出与 sideEffects 标记，更新 `packages/*/package.json`
 - [ ] T033 [P] 文档与快速开始校对：更新 `specs/001-init-color-monorepo/quickstart.md`、根 `README.md`
 - [ ] T034 [P] 示例自测脚本：在 `examples/react`、`examples/vue` 添加 `README` 与运行脚本说明
 - [ ] T035 收尾检查：运行 `pnpm lint && pnpm test && pnpm build`，记录结果

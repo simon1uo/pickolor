@@ -12,9 +12,8 @@
       "default": "./dist/styles.css"
     }
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "dist/styles.css",
+  "module": "dist/styles.css",
   "style": "dist/styles.css",
   "engines": {
     "node": ">=18"

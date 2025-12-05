@@ -40,3 +40,11 @@
 ## Resolved NEEDS CLARIFICATION
 
 当前无未决澄清项。
+
+## Build size & dependency audit (T031)
+
+- Context: pnpm build (tsup) on Node ≥18.
+- @pickolor/core: gzip dist/index.mjs 2.53 KB; dist/index.cjs 2.59 KB; runtime deps: 1 (colord). ✅ within ≤30 KB gzip, deps ≤2.
+- @pickolor/react: gzip dist/index.js 0.60 KB; dist/index.cjs 0.63 KB; runtime extra deps: 0 (peers react/react-dom/@pickolor/core). ✅ within ≤25 KB gzip, extra deps ≤1.
+- @pickolor/vue: gzip dist/index.js 1.35 KB; dist/index.cjs 1.36 KB; runtime extra deps: 0 (peers vue/@pickolor/core). ✅ within ≤25 KB gzip, extra deps ≤1.
+- @pickolor/styles (optional): gzip dist/styles.css 0.53 KB; no runtime deps. Informational only (not part of shell limits).
