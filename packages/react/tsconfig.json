@@ -8,8 +8,19 @@
     "declaration": true,
     "declarationMap": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": [
+      "ES2022",
+      "DOM"
+    ]
   },
-  "references": [{ "path": "../core/tsconfig.json" }],
-  "include": ["src/**/*", "tests/**/*"]
+  "references": [
+    {
+      "path": "../core/tsconfig.json"
+    }
+  ],
+  "include": [
+    "src/**/*",
+    "tests/**/*"
+  ]
 }

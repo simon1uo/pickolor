@@ -24,7 +24,7 @@
   "scripts": {
     "build": "tsup --config tsup.config.ts",
     "lint": "eslint src --ext .ts",
-    "test": "vitest run --dir ../../ -c ../../vitest.config.ts packages/core/tests"
+    "test": "vitest run"
   },
   "dependencies": {
     "colord": "^2.9.3"

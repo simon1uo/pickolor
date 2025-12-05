@@ -21,7 +21,9 @@
   "scripts": {
     "build": "tsup --config tsup.config.ts",
     "lint": "eslint src --ext .ts,.tsx,.vue",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "dev": "vite --config vite.config.ts",
+    "dev:vite": "vite --config vite.config.ts"
   },
   "peerDependencies": {
     "@pickolor/core": "workspace:*",
@@ -29,9 +31,14 @@
   },
   "devDependencies": {
     "@pickolor/core": "workspace:*",
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.15",
-    "vue": "^3.5.12"
+    "@pickolor/styles": "workspace:*",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/compiler-sfc": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
   }
 }

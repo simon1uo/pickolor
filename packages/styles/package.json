@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "mkdir -p dist && cp src/styles.css dist/styles.css",
-    "lint": "eslint src --ext .ts,.js,.tsx,.jsx",
+    "lint": "eslint src --ext .ts,.js,.tsx,.jsx --no-error-on-unmatched-pattern",
     "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {

@@ -46,9 +46,11 @@
 **Independent Test**: 通过核心纯函数对 HEX/RGB(A)/HSL(A)/OKLCH 解析与格式化的单测全通过。
 
 ### Tests for User Story 1
+
 - [X] T012 [P] [US1] 编写解析/格式化单测（合法/非法/越界/精度舍入）：`packages/core/tests/parse-format.spec.ts`
 
 ### Implementation for User Story 1
+
 - [X] T013 [US1] 定义核心类型与错误契约：`packages/core/src/types.ts`、`packages/core/src/errors.ts`
 - [X] T014 [US1] 实现解析管线（委托 colord，含适配层与错误映射）：`packages/core/src/parse.ts`
 - [X] T015 [US1] 实现格式化管线（统一模型→目标格式，精度/alpha 处理）：`packages/core/src/format.ts`
@@ -65,9 +67,11 @@
 **Independent Test**: 变换链单测覆盖顺序性、超界处理与输出一致性。
 
 ### Tests for User Story 2
+
 - [X] T018 [P] [US2] 编写变换链单测（亮度/饱和度/色相/alpha、超界/非法输入、顺序与舍入）：`packages/core/tests/transform.spec.ts`
 
 ### Implementation for User Story 2
+
 - [X] T019 [US2] 定义 Transformation 约束与校验：`packages/core/src/transform/types.ts`
 - [X] T020 [US2] 实现变换引擎（链式应用 + 精度/回退策略）：`packages/core/src/transform/index.ts`
 - [X] T021 [US2] 暴露变换 API 与组合工具：`packages/core/src/transform/index.ts`
@@ -83,16 +87,18 @@
 **Independent Test**: React/Vue 示例可在 5 分钟内完成颜色输入、变换与输出验证，样式可开关。
 
 ### Tests for User Story 3
-- [ ] T023 [P] [US3] React 壳层交互单测（受控输入/变换回调）：`packages/react/tests/color-picker.spec.tsx`
-- [ ] T024 [P] [US3] Vue 壳层交互单测（受控输入/变换回调，含 v-model 双向同步）：`packages/vue/tests/color-picker.spec.ts`
+
+- [X] T023 [P] [US3] React 壳层交互单测（受控输入/变换回调）：`packages/react/tests/color-picker.spec.tsx`
+- [X] T024 [P] [US3] Vue 壳层交互单测（受控输入/变换回调，含 v-model 双向同步）：`packages/vue/tests/color-picker.spec.ts`
 
 ### Implementation for User Story 3
-- [ ] T025 [US3] React 壳层组件与 hooks（消费核心 API，最小绑定）：`packages/react/src/ColorPicker.tsx`
-- [ ] T026 [US3] Vue 壳层组件与 composables（支持 v-model：`modelValue` + `update:modelValue`，事件负载为 ColorModel）：`packages/vue/src/ColorPicker.vue`、`packages/vue/src/useColor.ts`
-- [ ] T027 [US3] 样式包基础样式与 CSS 变量：`packages/styles/src/styles.css`
-- [ ] T028 [US3] React 示例接入核心与样式（可选）：`examples/react/src/App.tsx`
-- [ ] T029 [US3] Vue 示例接入核心与样式（可选）：`examples/vue/src/App.vue`
-- [ ] T030 [US3] 更新壳层入口导出：`packages/react/src/index.ts`、`packages/vue/src/index.ts`
+
+- [X] T025 [US3] React 壳层组件与 hooks（消费核心 API，最小绑定）：`packages/react/src/ColorPicker.tsx`
+- [X] T026 [US3] Vue 壳层组件与 composables（支持 v-model：`modelValue` + `update:modelValue`，事件负载为 ColorModel）：`packages/vue/src/ColorPicker.vue`、`packages/vue/src/useColor.ts`
+- [X] T027 [US3] 样式包基础样式与 CSS 变量：`packages/styles/src/styles.css`
+- [X] T028 [US3] React 示例接入核心与样式（可选）：`packages/react/dev/App.tsx`
+- [X] T029 [US3] Vue 示例接入核心与样式（可选）：`packages/vue/dev/App.vue`
+- [X] T030 [US3] 更新壳层入口导出：`packages/react/src/index.ts`、`packages/vue/src/index.ts`
 
 **Checkpoint**: 壳层与示例可独立验证，满足 FR-006/FR-007/FR-008
 

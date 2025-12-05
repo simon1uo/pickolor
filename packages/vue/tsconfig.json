@@ -9,8 +9,16 @@
     "declaration": true,
     "declarationMap": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "skipLibCheck": true
   },
-  "references": [{ "path": "../core/tsconfig.json" }],
-  "include": ["src/**/*", "tests/**/*"]
+  "references": [
+    {
+      "path": "../core/tsconfig.json"
+    }
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue"
+  ]
 }
