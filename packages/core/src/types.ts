@@ -1,9 +1,16 @@
-export type FormatType = 'hex' | 'rgba' | 'rgb' | 'hsla' | 'hsl' | 'oklch'
+export type FormatType
+  = | 'hex'
+    | 'hex8'
+    | 'rgba'
+    | 'rgb'
+    | 'hsla'
+    | 'hsl'
+    | 'hsv'
+    | 'hsva'
+    | 'cmyk'
+    | 'css'
+    | 'oklch'
 
-/**
- * ColorModel 采用 HSVA 作为单一来源（0-1 归一化），并记录最近的格式视图。
- * h: 0-360, s/v/a: 0-1
- */
 export interface ColorModel {
   h: number
   s: number

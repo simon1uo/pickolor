@@ -1,9 +1,16 @@
 import type { ColorError, ColorModel, FormatRequest, FormatType } from './types'
 import { colord } from 'colord'
+import { rgbToCmyk } from './cmyk'
 import { createError } from './errors'
 import { runFormatPlugins } from './plugins'
 
-const DEFAULT_PRECISION = 4
+const DEFAULT_PRECISION = 2
+const ALPHA_FORMAT_MAP: Partial<Record<FormatType, FormatType>> = {
+  hex: 'hex8',
+  rgb: 'rgba',
+  hsl: 'hsla',
+  hsv: 'hsva',
+}
 
 function round(value: number, precision = DEFAULT_PRECISION): number {
   return Number(value.toFixed(precision))
@@ -11,6 +18,10 @@ function round(value: number, precision = DEFAULT_PRECISION): number {
 
 function formatNumber(value: number, precision: number): string {
   return round(value, precision).toFixed(precision)
+}
+
+function formatInteger(value: number): string {
+  return Math.round(value).toString()
 }
 
 function resolvePrecision(request: FormatRequest): number {
@@ -62,6 +73,7 @@ function formatByTarget(
 ): string {
   const rgb = color.toRgb()
   const hsl = color.toHsl()
+  const hsv = color.toHsv()
   const alpha = rgb.a ?? 1
 
   switch (target) {
@@ -74,9 +86,21 @@ function formatByTarget(
     case 'rgb':
       return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
     case 'hsla':
-      return `hsla(${formatNumber(hsl.h, precision)}, ${formatNumber(hsl.s, precision)}%, ${formatNumber(hsl.l, precision)}%, ${formatNumber(alpha, precision)})`
+      return `hsla(${formatInteger(hsl.h)}, ${formatInteger(hsl.s)}%, ${formatInteger(hsl.l)}%, ${formatNumber(alpha, precision)})`
     case 'hsl':
-      return `hsl(${formatNumber(hsl.h, precision)}, ${formatNumber(hsl.s, precision)}%, ${formatNumber(hsl.l, precision)}%)`
+      return `hsl(${formatInteger(hsl.h)}, ${formatInteger(hsl.s)}%, ${formatInteger(hsl.l)}%)`
+    case 'hsv':
+      return `hsv(${formatInteger(hsv.h)}, ${formatInteger(hsv.s)}%, ${formatInteger(hsv.v)}%)`
+    case 'hsva':
+      return `hsva(${formatInteger(hsv.h)}, ${formatInteger(hsv.s)}%, ${formatInteger(hsv.v)}%, ${formatNumber(alpha, precision)})`
+    case 'hex8':
+      return hexWithAlpha(color, alpha)
+    case 'cmyk': {
+      const [c, m, y, k] = rgbToCmyk(rgb.r, rgb.g, rgb.b)
+      return `cmyk(${Math.round(c * 100)}, ${Math.round(m * 100)}, ${Math.round(y * 100)}, ${Math.round(k * 100)})`
+    }
+    case 'css':
+      return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${formatNumber(alpha, precision)})`
     case 'oklch':
       throw createError('format', 'UNSUPPORTED_TARGET', 'OKLCH formatting not supported yet')
     default:
@@ -102,6 +126,7 @@ export function formatColor(model: ColorModel, request: FormatRequest): string {
     throw err
   }
 
-  const target = request.target ?? model.format
+  const rawTarget = request.target ?? model.format
+  const target = includeAlpha ? (ALPHA_FORMAT_MAP[rawTarget] ?? rawTarget) : rawTarget
   return formatByTarget(color, target, precision, includeAlpha)
 }

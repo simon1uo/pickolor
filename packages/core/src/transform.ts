@@ -1,6 +1,7 @@
 import type { ColorModel, Transformation } from './types'
 import { colord } from 'colord'
 import { createError } from './errors'
+import { runTransformPlugins } from './plugins'
 import { assertWithinRange } from './types'
 
 const PRECISION = 4
@@ -25,33 +26,46 @@ function modelToColord(model: ColorModel) {
 }
 
 function applyStep(color: ReturnType<typeof colord>, step: Transformation): ReturnType<typeof colord> {
-  try {
-    assertWithinRange(step)
-  }
-  catch (err) {
-    throw createError('transform', 'OUT_OF_RANGE', (err as Error).message)
-  }
-
   switch (step.type) {
     case 'lighten':
+      try {
+        assertWithinRange(step)
+      }
+      catch (err) {
+        throw createError('transform', 'OUT_OF_RANGE', (err as Error).message)
+      }
       return step.value >= 0
         ? color.lighten(step.value * 100)
         : color.darken(Math.abs(step.value) * 100)
     case 'darken':
+      try {
+        assertWithinRange(step)
+      }
+      catch (err) {
+        throw createError('transform', 'OUT_OF_RANGE', (err as Error).message)
+      }
       return step.value >= 0
         ? color.darken(step.value * 100)
         : color.lighten(Math.abs(step.value) * 100)
     case 'saturate':
-      return step.value >= 0
-        ? color.saturate(step.value * 100)
-        : color.desaturate(Math.abs(step.value) * 100)
+      return color.saturate(Math.max(0, Math.min(1, step.value)) * 100)
     case 'desaturate':
-      return step.value >= 0
-        ? color.desaturate(step.value * 100)
-        : color.saturate(Math.abs(step.value) * 100)
+      return color.desaturate(Math.max(0, Math.min(1, step.value)) * 100)
     case 'hueShift':
+      try {
+        assertWithinRange(step)
+      }
+      catch (err) {
+        throw createError('transform', 'OUT_OF_RANGE', (err as Error).message)
+      }
       return color.rotate(step.value)
     case 'alpha': {
+      try {
+        assertWithinRange(step)
+      }
+      catch (err) {
+        throw createError('transform', 'OUT_OF_RANGE', (err as Error).message)
+      }
       const current = color.toRgb().a ?? 1
       const next = normalizeAlpha(current + step.value)
       return color.alpha(next)
@@ -66,21 +80,29 @@ export function transformColor(model: ColorModel, steps: Transformation[]): Colo
     throw createError('transform', 'INVALID_STEPS', 'Transform steps must be an array')
   }
 
-  let color = modelToColord(model)
+  let currentModel = model
+  let color = modelToColord(currentModel)
 
   for (const step of steps) {
+    const pluginResult = runTransformPlugins(currentModel, step)
+    if (pluginResult) {
+      currentModel = pluginResult
+      color = modelToColord(currentModel)
+      continue
+    }
+
     color = applyStep(color, step)
+    const hsv = color.toHsv()
+    const alpha = normalizeAlpha(color.toRgb().a)
+    currentModel = {
+      h: round(hsv.h, PRECISION),
+      s: round(hsv.s / 100, PRECISION),
+      v: round(hsv.v / 100, PRECISION),
+      a: alpha,
+      format: currentModel.format,
+      source: currentModel.source,
+    }
   }
 
-  const hsv = color.toHsv()
-  const alpha = normalizeAlpha(color.toRgb().a)
-
-  return {
-    h: round(hsv.h, PRECISION),
-    s: round(hsv.s / 100, PRECISION),
-    v: round(hsv.v / 100, PRECISION),
-    a: alpha,
-    format: model.format,
-    source: model.source,
-  }
+  return currentModel
 }
