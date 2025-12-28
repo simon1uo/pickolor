@@ -29,6 +29,10 @@
     "@pickolor/core": "workspace:*",
     "vue": ">=3.3.0"
   },
+  "dependencies": {
+    "@floating-ui/vue": "catalog:",
+    "@vueuse/core": "catalog:"
+  },
   "devDependencies": {
     "@pickolor/core": "workspace:*",
     "@pickolor/styles": "workspace:*",

@@ -12,7 +12,7 @@
     "build": "pnpm -r build",
     "dev:react": "pnpm --filter @pickolor/react dev",
     "dev:vue": "pnpm --filter @pickolor/vue dev",
-    "lint": "pnpm -r --parallel lint",
+    "lint": "pnpm -r --parallel lint --fix",
     "test": "pnpm -r test"
   },
   "devDependencies": {
