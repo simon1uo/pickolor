@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "Headless color parsing/formatting/transform primitives for Pickolor",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": false,
   "exports": {
     ".": {

@@ -9,6 +9,7 @@ packages:
   - tests
 catalog:
   '@antfu/eslint-config': ^6.4.1
+  '@changesets/cli': ^2.27.11
   '@eslint-react/eslint-plugin': ^2.3.12
   '@types/node': ^24.10.1
   '@types/react': ^18.3.18

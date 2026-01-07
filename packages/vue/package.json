@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "Vue bindings for Pickolor core APIs",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": false,
   "exports": {
     ".": {

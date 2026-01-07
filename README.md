@@ -7,19 +7,96 @@ A lightweight, cross-framework color toolkit maintained as a pnpm workspace with
 - `@pickolor/vue`: Thin Vue 3 shell with `v-model` support (`modelValue` + `update:modelValue`).
 - `@pickolor/styles`: Optional CSS variables and base styles, decoupled from core/shells.
 
-## Quickstart (for consumers)
+## Installation
 ```bash
 pnpm add @pickolor/core @pickolor/react @pickolor/vue @pickolor/styles
 ```
-Core example:
-```ts
-import { parseColor, transformColor, formatColor } from '@pickolor/core';
+Install only what you need, e.g. `pnpm add @pickolor/core` or `pnpm add @pickolor/react`.
 
-const model = parseColor('#ff8800');
-const next = transformColor(model, [{ type: 'lighten', value: 0.1 }]);
-const out = formatColor(next, { target: 'rgba', includeAlpha: true });
+## Usage
+### Core
+```ts
+import { formatColor, parseColor, transformColor } from '@pickolor/core'
+
+const model = parseColor('#ff8800')
+const next = transformColor(model, [{ type: 'lighten', value: 0.1 }])
+const out = formatColor(next, { target: 'rgba', includeAlpha: true })
 ```
+
+### React
+```tsx
+import { ColorPicker } from '@pickolor/react'
+import { useState } from 'react'
+import '@pickolor/styles'
+
+export function App() {
+  const [value, setValue] = useState('#ff8800')
+
+  return (
+    <ColorPicker
+      value={value}
+      onChange={({ value: next }) => setValue(next)}
+      includeAlpha
+      target="hex"
+    />
+  )
+}
+```
+
+### Vue
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { ColorPicker } from '@pickolor/vue';
+import '@pickolor/styles';
+
+const value = ref('#ff8800');
+</script>
+
+<template>
+  <ColorPicker v-model="value" :include-alpha="true" target="hex" />
+</template>
+```
+
 More examples (React/Vue usage, error contract) live in `specs/001-init-color-monorepo/quickstart.md`.
+
+## API Overview
+### `@pickolor/core`
+| Export | Purpose | Signature |
+| --- | --- | --- |
+| `parseColor` | Parse user input into a `ColorModel`. | `(input: string) => ColorModel` |
+| `formatColor` | Format a `ColorModel` into a string. | `(model: ColorModel, request: FormatRequest) => string` |
+| `transformColor` | Apply transformations to a model. | `(model: ColorModel, steps: Transformation[]) => ColorModel` |
+| `registerPlugin` | Extend parse/format/transform behavior. | `(plugin: Plugin) => void` |
+
+Key types: `ColorModel`, `FormatRequest`, `Transformation`, `ColorError`.
+
+### `@pickolor/react`
+Primary export: `ColorPicker`.
+
+| Prop | Purpose |
+| --- | --- |
+| `value` / `modelValue` / `defaultValue` | Controlled/uncontrolled input value. |
+| `target` / `precision` / `includeAlpha` | Output format control. |
+| `popoverProps` | Popover positioning and behavior. |
+| `onChange` / `onError` | Change and validation callbacks. |
+
+### `@pickolor/vue`
+Primary export: `ColorPicker`.
+
+| Prop | Purpose |
+| --- | --- |
+| `modelValue` / `value` / `defaultValue` | Controlled/uncontrolled input value. |
+| `target` / `precision` / `includeAlpha` | Output format control. |
+| `popoverProps` | Popover positioning and behavior. |
+
+Emits: `update:modelValue`, `change`, `error`.
+
+### `@pickolor/styles`
+Import once to get base styles and CSS variables:
+```ts
+import '@pickolor/styles'
+```
 
 ## Workspace layout
 ```

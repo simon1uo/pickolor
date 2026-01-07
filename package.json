@@ -10,13 +10,20 @@
   },
   "scripts": {
     "build": "pnpm -r build",
+    "changeset": "changeset",
+    "changeset:publish": "changeset publish",
+    "changeset:version": "changeset version",
+    "ci:publish": "pnpm -r build && changeset publish",
     "dev:react": "pnpm --filter @pickolor/react dev",
     "dev:vue": "pnpm --filter @pickolor/vue dev",
     "lint": "pnpm -r --parallel lint --fix",
+    "release:dry": "pnpm -r build && changeset publish --dry-run",
+    "release:pack": "pnpm -r pack",
     "test": "pnpm -r test"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@changesets/cli": "catalog:",
     "@eslint-react/eslint-plugin": "catalog:",
     "@testing-library/dom": "catalog:",
     "@testing-library/jest-dom": "catalog:",

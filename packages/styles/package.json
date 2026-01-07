@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "Optional styles and CSS variables for Pickolor shells",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": ["./dist/styles.css", "./src/styles.css"],
   "exports": {
     ".": {
