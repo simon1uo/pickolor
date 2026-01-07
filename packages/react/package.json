@@ -30,6 +30,9 @@
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0"
   },
+  "dependencies": {
+    "@floating-ui/react": "catalog:"
+  },
   "devDependencies": {
     "@pickolor/core": "workspace:*",
     "@pickolor/styles": "workspace:*",
