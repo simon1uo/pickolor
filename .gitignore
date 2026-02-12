@@ -31,3 +31,4 @@ packages/*/tests/*.d.ts.map
 
 .serena
 .codex/plan/
+.sisyphus/
