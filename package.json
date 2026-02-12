@@ -13,10 +13,12 @@
     "changeset": "changeset",
     "changeset:publish": "changeset publish",
     "changeset:version": "changeset version",
-    "ci:publish": "pnpm -r build && changeset publish",
+    "ci:changeset": "node scripts/ci/check-changeset.mjs",
+    "ci:publish": "pnpm -r build && pnpm release:check && changeset publish",
     "dev:react": "pnpm --filter @pickolor/react dev",
     "dev:vue": "pnpm --filter @pickolor/vue dev",
     "lint": "pnpm -r --parallel lint --fix",
+    "release:check": "node scripts/release/check-artifacts.mjs",
     "release:dry": "pnpm -r build && changeset publish --dry-run",
     "release:pack": "pnpm -r pack",
     "test": "pnpm -r test"

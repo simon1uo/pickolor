@@ -11,10 +11,12 @@ pnpm changeset
 ```
 Follow prompts and select affected packages and version bump.
 
-## Local dry run (no publish)
+## Future releases
+1) For any publishable change, create a changeset
 ```bash
-pnpm release:dry
+pnpm changeset
 ```
+2) Merge PR to `main` and wait for CI + release workflow
 
 ## Inspect publish artifacts
 ```bash
@@ -28,9 +30,12 @@ pnpm changeset publish
 ```
 
 ## GitHub Actions publish
-- Requires `NPM_TOKEN` secret with npm publish permission.
-- On `main` push, Changesets will publish when changesets exist.
+- Configure npm Trusted Publishing for this repository and workflow.
+- Release runs only after CI succeeds on `main`.
+- Changesets will publish when changesets exist.
 
 ## Notes
 - Scoped packages require `publishConfig.access=public`.
 - Use `pnpm changeset version` to preview version bumps locally.
+- Release requires `dist/`, `README.md`, and `LICENSE` in each package.
+- Trusted publishing requires npm CLI 11.5.1+ in CI.

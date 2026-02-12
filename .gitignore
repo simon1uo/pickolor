@@ -30,3 +30,4 @@ packages/*/tests/*.d.ts
 packages/*/tests/*.d.ts.map
 
 .serena
+.codex/plan/

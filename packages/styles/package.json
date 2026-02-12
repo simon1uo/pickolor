@@ -4,10 +4,30 @@
   "version": "0.1.0",
   "description": "Optional styles and CSS variables for Pickolor shells",
   "license": "MIT",
+  "homepage": "https://github.com/simon1uo/pickolor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simon1uo/pickolor.git",
+    "directory": "packages/styles"
+  },
+  "bugs": {
+    "url": "https://github.com/simon1uo/pickolor/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": ["./dist/styles.css", "./src/styles.css"],
+  "keywords": [
+    "pickolor",
+    "color",
+    "css",
+    "styles",
+    "ui",
+    "typescript"
+  ],
+  "sideEffects": [
+    "./dist/styles.css",
+    "./src/styles.css"
+  ],
   "exports": {
     ".": {
       "import": "./dist/styles.css",
@@ -17,6 +37,11 @@
   },
   "main": "dist/styles.css",
   "module": "dist/styles.css",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
   "style": "dist/styles.css",
   "engines": {
     "node": ">=18"

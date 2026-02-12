@@ -256,11 +256,15 @@ function handleKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <div class="pickolor-slider" :data-vertical="isVertical ? 'true' : 'false'" :data-variant="type ?? undefined"
-    :data-disabled="disabled ? 'true' : 'false'">
-    <div ref="trackRef" class="pickolor-slider-track" role="slider" :tabindex="disabled ? -1 : 0" :aria-valuemin="min"
+  <div
+    class="pickolor-slider" :data-vertical="isVertical ? 'true' : 'false'" :data-variant="type ?? undefined"
+    :data-disabled="disabled ? 'true' : 'false'"
+  >
+    <div
+      ref="trackRef" class="pickolor-slider-track" role="slider" :tabindex="disabled ? -1 : 0" :aria-valuemin="min"
       :aria-valuemax="max" :aria-valuenow="currentValue" :aria-orientation="isVertical ? 'vertical' : 'horizontal'"
-      :style="trackStyle" @keydown="handleKeydown">
+      :style="trackStyle" @keydown="handleKeydown"
+    >
       <span v-if="type === 'alpha'" class="pickolor-slider-layer pickolor-slider-checker" />
       <span class="pickolor-slider-layer pickolor-slider-gradient" :style="gradientStyle" />
       <span class="pickolor-slider-thumb" :style="thumbStyle" />

@@ -4,9 +4,26 @@
   "version": "0.1.0",
   "description": "Headless color parsing/formatting/transform primitives for Pickolor",
   "license": "MIT",
+  "homepage": "https://github.com/simon1uo/pickolor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simon1uo/pickolor.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/simon1uo/pickolor/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "pickolor",
+    "color",
+    "color-utils",
+    "color-space",
+    "colord",
+    "typescript"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -21,6 +38,11 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
   "engines": {
     "node": ">=18"
   },

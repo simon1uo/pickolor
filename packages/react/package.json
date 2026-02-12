@@ -4,9 +4,26 @@
   "version": "0.1.0",
   "description": "React bindings for Pickolor core APIs",
   "license": "MIT",
+  "homepage": "https://github.com/simon1uo/pickolor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simon1uo/pickolor.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/simon1uo/pickolor/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "pickolor",
+    "color",
+    "color-picker",
+    "react",
+    "ui",
+    "typescript"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -18,6 +35,11 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
   "engines": {
     "node": ">=18"
   },
@@ -34,20 +56,20 @@
     "react-dom": ">=18.2.0"
   },
   "dependencies": {
-    "@floating-ui/react": "catalog:"
+    "@floating-ui/react": "^0.27.16"
   },
   "devDependencies": {
     "@pickolor/core": "workspace:*",
     "@pickolor/styles": "workspace:*",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react-swc": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "tsup": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:",
-    "vitest": "catalog:"
+    "@types/node": "^24.10.1",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react-swc": "^4.2.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.6",
+    "vitest": "^4.0.15"
   }
 }
