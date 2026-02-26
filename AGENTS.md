@@ -1,9 +1,5 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-02-12T11:31:33+08:00
-**Commit:** 89e977a
-**Branch:** main
-
 ## OVERVIEW
 Pickolor is a pnpm monorepo for a cross-framework color toolkit: pure core transforms plus thin React/Vue UI shells and an optional CSS package.
 Build/test/lint and release gates are centralized at repo root; package internals stay isolated by `packages/*` boundaries.
@@ -20,7 +16,6 @@ pickolor/
 ├── scripts/       # CI/release guards (changeset + artifacts)
 ├── tests/         # shared Vitest setup
 ├── .github/workflows/
-└── specs/         # planning/research artifacts (non-runtime)
 ```
 
 ## WHERE TO LOOK
