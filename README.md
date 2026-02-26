@@ -58,7 +58,7 @@ const value = ref('#ff8800');
 </template>
 ```
 
-More examples (React/Vue usage, error contract) live in `specs/001-init-color-monorepo/quickstart.md`.
+More examples live in `examples/react/README.md` and `examples/vue/README.md`.
 
 ## API Overview
 ### `@pickolor/core`
